@@ -12,6 +12,8 @@ Only works on Windows, at the moment.
 - Displays **current track** with image
 - Displays whether it is a **VS race or a Battle match**
 
+Party size has not been implemented (yet)
+
 ## Screenshots
 ![](https://github.com/dotcomboom/mkwii-rpredux/blob/master/screenshots/rpc_idle.png?raw=true)
 ![](https://github.com/dotcomboom/mkwii-rpredux/blob/master/screenshots/rpc_ingame.png?raw=true)
