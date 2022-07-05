@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32602.291
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Mario Kart Wii Rich Presence Redux", "Mario Kart Wii Rich Presence Redux\Mario Kart Wii Rich Presence Redux.vbproj", "{7D1E572D-3585-4DD4-A834-9CB00ABA88CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D1E572D-3585-4DD4-A834-9CB00ABA88CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D1E572D-3585-4DD4-A834-9CB00ABA88CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D1E572D-3585-4DD4-A834-9CB00ABA88CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D1E572D-3585-4DD4-A834-9CB00ABA88CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {82365457-BE3C-44A8-ADC8-1314F4133657}
+	EndGlobalSection
+EndGlobal
