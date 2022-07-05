@@ -3,7 +3,13 @@
   <Profiles />
   <Settings>
     <Setting Name="startUrl" Type="System.Uri" Scope="User">
-      <Value Profile="(Default)">https://wiimmfi.de/stats/mkw/room/p</Value>
+      <Value Profile="(Default)">https://wiimmfi.de/stats/mkw/room/p1</Value>
+    </Setting>
+    <Setting Name="shareBtn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="addText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0000-0000-0000</Value>
     </Setting>
   </Settings>
 </SettingsFile>

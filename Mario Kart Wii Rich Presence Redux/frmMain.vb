@@ -18,14 +18,11 @@ Public Class frmMain
         'get profile url
         Dim rgx As Regex = New Regex("p([0-9])+")
         Dim matches = rgx.Matches(WebView21.Source.AbsoluteUri)
-        CheckBox1.Checked = matches.Count > 0
+        'CheckBox1.Checked = matches.Count > 0
         If matches.Count > 0 Then
 
             TextBox2.Text = WebView21.Source.AbsoluteUri
             My.Settings.startUrl = WebView21.Source
-
-
-
 
             'scraping :)
             ' <a href="https://ct.wiimm.de/i/3459">N64 Sherbet Land (Nintendo)</a>
@@ -77,37 +74,51 @@ Public Class frmMain
             small_image = "mario"
             large_image = track.Replace(" ", "").Replace("'", "").ToLower()
 
+            If details = "Not in a room" Then
+                large_image = "placeholder"
+                state = My.Settings.addText
+            End If
 
-            ListView1.Items.Clear()
+            lvInfos.Items.Clear()
             Dim d As New ListViewItem
             d.Text = "Details"
             d.SubItems.Add(details)
-            ListView1.Items.Add(d)
+            lvInfos.Items.Add(d)
             Dim s As New ListViewItem
             s.Text = "State"
             s.SubItems.Add(state)
-            ListView1.Items.Add(s)
+            lvInfos.Items.Add(s)
             Dim t As New ListViewItem
             t.Text = "Track"
             t.SubItems.Add(track)
-            ListView1.Items.Add(t)
+            lvInfos.Items.Add(t)
             Dim li As New ListViewItem
             li.Text = "Large image"
             li.SubItems.Add(large_image)
-            ListView1.Items.Add(li)
+            lvInfos.Items.Add(li)
             Dim si As New ListViewItem
             si.Text = "Small image"
             si.SubItems.Add(small_image)
-            ListView1.Items.Add(si)
+            lvInfos.Items.Add(si)
 
-            client.SetPresence(New RichPresence() With {
+
+            Dim pres As New RichPresence() With {
                                .Details = details,
                                .State = state,
                                .Assets = New Assets() With {
                                .LargeImageKey = large_image,
                                .SmallImageKey = small_image,
                                .LargeImageText = track,
-                               .SmallImageText = TextBox1.Text}})
+                               .SmallImageText = txtAddText.Text}}
+
+            If My.Settings.shareBtn Then
+                Dim btn As New DiscordRPC.Button
+                btn.Url = txtUserURL.Text
+                btn.Label = "View details"
+                pres.Buttons = {btn}
+            End If
+
+            client.SetPresence(pres)
 
         End If
 
@@ -118,8 +129,10 @@ Public Class frmMain
         If My.Settings.startUrl.AbsolutePath = "about:blank" Then
             My.Settings.startUrl = New Uri("https://wiimmfi.de/stats/mkw/room/p")
         End If
-        TextBox4.Text = My.Settings.startUrl.AbsoluteUri
+        chkShare.Checked = My.Settings.shareBtn
+        txtUserURL.Text = My.Settings.startUrl.AbsoluteUri
         WebView21.Source = My.Settings.startUrl
+        txtAddText.Text = My.Settings.addText
 
         client = New DiscordRpcClient("662481965840072717")
         client.Logger = New ConsoleLogger() With {
@@ -128,46 +141,47 @@ Public Class frmMain
 
         client.Initialize()
         client.SetPresence(New RichPresence() With {
-            .Details = "Example Project",
-            .State = "csharp example",
+            .Details = "MKW-RPRedux active",
+            .State = "Starting up (or configuring)",
             .Assets = New Assets() With {
-                .LargeImageKey = "image_large",
-                .LargeImageText = "Lachee's Discord IPC Library",
-                .SmallImageKey = "image_small"
+                .LargeImageKey = "placeholder",
+                .LargeImageText = "MKWii-RPRedux",
+                .SmallImageKey = "mario"
             }
         })
     End Sub
 
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSaveUpdate.Click
+        My.Settings.addText = txtAddText.Text
+        WebView21.CoreWebView2.Navigate(txtUserURL.Text)
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        WebView21.CoreWebView2.Navigate(TextBox4.Text)
-    End Sub
-
-    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+    Private Sub lnkList_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkList.LinkClicked
         Process.Start("https://wiimmfi.de/stats/mkw/")
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub btnOpenClose_Click(sender As Object, e As EventArgs) Handles btnOpenClose.Click
         If Me.Tag = "expanded" Then
             Me.Tag = ""
             Me.Size = New Size(306, 440)
             Me.MaximizeBox = False
             Me.FormBorderStyle = FormBorderStyle.FixedSingle
-            Button2.Text = "Expand >>"
+            btnOpenClose.Text = "Expand >>"
         Else
             Me.Tag = "expanded"
             Me.Size = New Size(784, 440)
             Me.MaximizeBox = True
             Me.FormBorderStyle = FormBorderStyle.Sizable
-            Button2.Text = "<< Retract"
+            btnOpenClose.Text = "<< Retract"
         End If
         WebView21.Visible = Me.Tag = "expanded"
     End Sub
 
-    Private Sub LinkGithub_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkGithub.LinkClicked
+    Private Sub LinkGithub_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkGithub.LinkClicked
         Process.Start("https://github.com/dotcomboom/mkwii-rpredux")
+    End Sub
+
+    Private Sub chkShare_CheckedChanged(sender As Object, e As EventArgs) Handles chkShare.CheckedChanged
+        My.Settings.shareBtn = chkShare.Checked
     End Sub
 End Class

@@ -56,13 +56,37 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("https://wiimmfi.de/stats/mkw/room/p")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://wiimmfi.de/stats/mkw/room/p1")>  _
         Public Property startUrl() As Global.System.Uri
             Get
                 Return CType(Me("startUrl"),Global.System.Uri)
             End Get
             Set
                 Me("startUrl") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property shareBtn() As Boolean
+            Get
+                Return CType(Me("shareBtn"),Boolean)
+            End Get
+            Set
+                Me("shareBtn") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0000-0000-0000")>  _
+        Public Property addText() As String
+            Get
+                Return CType(Me("addText"),String)
+            End Get
+            Set
+                Me("addText") = value
             End Set
         End Property
     End Class
