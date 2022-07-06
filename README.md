@@ -1,4 +1,4 @@
-# mkwii-rpredux
+# MKWii-RPRedux
 Mario Kart Wii Discord Rich Presence for Wiimmfi - Rewritten with .NET and WebView2.
 
 Only works on Windows, at the moment.
