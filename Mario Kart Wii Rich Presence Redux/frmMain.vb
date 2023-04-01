@@ -10,6 +10,8 @@ Public Class frmMain
     Private small_image As String = ""
     Private party_size As Integer = 0
 
+    Public default_app_id = "662481965840072717"
+
     Private client As DiscordRpcClient
 
     Private Async Sub WebView21_NavigationCompletedAsync(sender As Object, e As Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs) Handles WebView21.NavigationCompleted
@@ -125,7 +127,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub Form1_Load() Handles MyBase.Load
         If My.Settings.startUrl.AbsolutePath = "about:blank" Then
             My.Settings.startUrl = New Uri("https://wiimmfi.de/stats/mkw/room/p")
         End If
@@ -134,12 +136,30 @@ Public Class frmMain
         WebView21.Source = My.Settings.startUrl
         txtAddText.Text = My.Settings.addText
 
-        client = New DiscordRpcClient("662481965840072717")
+        useOwnApp.Checked = My.Settings.useOwnApp
+
+        init_client()
+    End Sub
+    Private Sub init_client()
+        If My.Settings.useOwnApp Then
+            Try
+                client = New DiscordRpcClient(My.Settings.userAppId)
+            Catch ex As Exception
+                MsgBox(ex.Message & "\r\nUsing own application ID has been disabled.", MsgBoxStyle.Exclamation)
+                client = New DiscordRpcClient(default_app_id)
+            End Try
+        Else
+            client = New DiscordRpcClient(default_app_id)
+        End If
+
         client.Logger = New ConsoleLogger() With {
             .Level = LogLevel.Warning
         }
 
         client.Initialize()
+        If Not client.IsInitialized Then
+            MsgBox("There could be an issue with the provided client ID, or you don't have Discord running.")
+        End If
         client.SetPresence(New RichPresence() With {
             .Details = "MKW-RPRedux active",
             .State = "Starting up (or configuring)",
@@ -183,5 +203,23 @@ Public Class frmMain
 
     Private Sub chkShare_CheckedChanged(sender As Object, e As EventArgs) Handles chkShare.CheckedChanged
         My.Settings.shareBtn = chkShare.Checked
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles useOwnApp.Click
+        If useOwnApp.Checked Then
+            frmOwnRPC.ClientId.Text = My.Settings.userAppId
+            If frmOwnRPC.ShowDialog = DialogResult.OK Then
+                My.Settings.userAppId = frmOwnRPC.ClientId.Text
+            Else
+                useOwnApp.Checked = False
+            End If
+        End If
+        If My.Settings.userAppId = "" Then
+            useOwnApp.Checked = False
+        End If
+        My.Settings.useOwnApp = useOwnApp.Checked
+        client.ClearPresence()
+        client.Dispose()
+        init_client()
     End Sub
 End Class
