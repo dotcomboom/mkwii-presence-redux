@@ -11,5 +11,11 @@
     <Setting Name="addText" Type="System.String" Scope="User">
       <Value Profile="(Default)">0000-0000-0000</Value>
     </Setting>
+    <Setting Name="useOwnApp" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="userAppId" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

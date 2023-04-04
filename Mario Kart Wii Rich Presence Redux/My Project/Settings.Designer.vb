@@ -89,6 +89,30 @@ Namespace My
                 Me("addText") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property useOwnApp() As Boolean
+            Get
+                Return CType(Me("useOwnApp"),Boolean)
+            End Get
+            Set
+                Me("useOwnApp") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property userAppId() As String
+            Get
+                Return CType(Me("userAppId"),String)
+            End Get
+            Set
+                Me("userAppId") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
