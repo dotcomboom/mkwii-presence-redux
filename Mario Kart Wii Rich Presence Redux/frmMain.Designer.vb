@@ -23,7 +23,7 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Me.WebView21 = New Microsoft.Web.WebView2.WinForms.WebView2()
+        Me.webView = New Microsoft.Web.WebView2.WinForms.WebView2()
         Me.lblAddText = New System.Windows.Forms.Label()
         Me.txtAddText = New System.Windows.Forms.TextBox()
         Me.lvInfos = New System.Windows.Forms.ListView()
@@ -40,24 +40,24 @@ Partial Class frmMain
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.useOwnApp = New System.Windows.Forms.CheckBox()
-        CType(Me.WebView21, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.webView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'WebView21
+        'webView
         '
-        Me.WebView21.AllowExternalDrop = True
-        Me.WebView21.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.webView.AllowExternalDrop = True
+        Me.webView.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.WebView21.CreationProperties = Nothing
-        Me.WebView21.DefaultBackgroundColor = System.Drawing.Color.White
-        Me.WebView21.Location = New System.Drawing.Point(296, 9)
-        Me.WebView21.Name = "WebView21"
-        Me.WebView21.Size = New System.Drawing.Size(0, 380)
-        Me.WebView21.Source = New System.Uri("https://wiimmfi.de/stats/mkw", System.UriKind.Absolute)
-        Me.WebView21.TabIndex = 13
-        Me.WebView21.Visible = False
-        Me.WebView21.ZoomFactor = 1.0R
+        Me.webView.CreationProperties = Nothing
+        Me.webView.DefaultBackgroundColor = System.Drawing.Color.White
+        Me.webView.Location = New System.Drawing.Point(296, 9)
+        Me.webView.Name = "webView"
+        Me.webView.Size = New System.Drawing.Size(0, 380)
+        Me.webView.Source = New System.Uri("https://wiimmfi.de/stats/mkw", System.UriKind.Absolute)
+        Me.webView.TabIndex = 13
+        Me.webView.Visible = False
+        Me.webView.ZoomFactor = 1.0R
         '
         'lblAddText
         '
@@ -195,9 +195,9 @@ Partial Class frmMain
         Me.useOwnApp.AutoSize = True
         Me.useOwnApp.Location = New System.Drawing.Point(14, 188)
         Me.useOwnApp.Name = "useOwnApp"
-        Me.useOwnApp.Size = New System.Drawing.Size(176, 19)
+        Me.useOwnApp.Size = New System.Drawing.Size(193, 19)
         Me.useOwnApp.TabIndex = 9
-        Me.useOwnApp.Text = "Use own Discord application"
+        Me.useOwnApp.Text = "Use custom Discord application"
         Me.useOwnApp.UseVisualStyleBackColor = True
         '
         'frmMain
@@ -220,19 +220,19 @@ Partial Class frmMain
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtAddText)
         Me.Controls.Add(Me.lblAddText)
-        Me.Controls.Add(Me.WebView21)
+        Me.Controls.Add(Me.webView)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmMain"
         Me.Text = "MKWii-RPRedux"
-        CType(Me.WebView21, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.webView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents WebView21 As Microsoft.Web.WebView2.WinForms.WebView2
+    Friend WithEvents webView As Microsoft.Web.WebView2.WinForms.WebView2
     Friend WithEvents lblAddText As Label
     Friend WithEvents txtAddText As TextBox
     Friend WithEvents lvInfos As ListView
