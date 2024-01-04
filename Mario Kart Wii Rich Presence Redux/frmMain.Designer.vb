@@ -84,9 +84,9 @@ Partial Class frmMain
 		'
 		Me.lvInfos.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
 		Me.lvInfos.HideSelection = False
-		Me.lvInfos.Location = New System.Drawing.Point(14, 296)
+		Me.lvInfos.Location = New System.Drawing.Point(14, 266)
 		Me.lvInfos.Name = "lvInfos"
-		Me.lvInfos.Size = New System.Drawing.Size(260, 101)
+		Me.lvInfos.Size = New System.Drawing.Size(260, 144)
 		Me.lvInfos.TabIndex = 10
 		Me.lvInfos.UseCompatibleStateImageBehavior = False
 		Me.lvInfos.View = System.Windows.Forms.View.Details
@@ -94,7 +94,7 @@ Partial Class frmMain
 		'ColumnHeader1
 		'
 		Me.ColumnHeader1.Text = "Key"
-		Me.ColumnHeader1.Width = 90
+		Me.ColumnHeader1.Width = 94
 		'
 		'ColumnHeader2
 		'
@@ -139,7 +139,7 @@ Partial Class frmMain
 		'
 		'btnOpenClose
 		'
-		Me.btnOpenClose.Location = New System.Drawing.Point(197, 403)
+		Me.btnOpenClose.Location = New System.Drawing.Point(197, 416)
 		Me.btnOpenClose.Name = "btnOpenClose"
 		Me.btnOpenClose.Size = New System.Drawing.Size(76, 23)
 		Me.btnOpenClose.TabIndex = 12
@@ -208,31 +208,32 @@ Partial Class frmMain
 		'useCustomImages
 		'
 		Me.useCustomImages.AutoSize = True
-		Me.useCustomImages.Location = New System.Drawing.Point(14, 216)
+		Me.useCustomImages.Location = New System.Drawing.Point(16, 166)
 		Me.useCustomImages.Name = "useCustomImages"
 		Me.useCustomImages.Size = New System.Drawing.Size(191, 19)
 		Me.useCustomImages.TabIndex = 100000
 		Me.useCustomImages.Text = "Use art assets for custom tracks"
 		Me.useCustomImages.UseVisualStyleBackColor = True
+		Me.useCustomImages.Visible = False
 		'
 		'useTrackState
 		'
 		Me.useTrackState.AutoSize = True
-		Me.useTrackState.Location = New System.Drawing.Point(14, 241)
+		Me.useTrackState.Location = New System.Drawing.Point(14, 216)
 		Me.useTrackState.Name = "useTrackState"
-		Me.useTrackState.Size = New System.Drawing.Size(176, 19)
+		Me.useTrackState.Size = New System.Drawing.Size(239, 19)
 		Me.useTrackState.TabIndex = 100001
-		Me.useTrackState.Text = "Display current track in State"
+		Me.useTrackState.Text = "Display current track in State during play"
 		Me.useTrackState.UseVisualStyleBackColor = True
 		'
 		'useTextDetails
 		'
 		Me.useTextDetails.AutoSize = True
-		Me.useTextDetails.Location = New System.Drawing.Point(14, 266)
+		Me.useTextDetails.Location = New System.Drawing.Point(14, 241)
 		Me.useTextDetails.Name = "useTextDetails"
-		Me.useTextDetails.Size = New System.Drawing.Size(164, 19)
+		Me.useTextDetails.Size = New System.Drawing.Size(227, 19)
 		Me.useTextDetails.TabIndex = 100002
-		Me.useTextDetails.Text = "Display own text in Details"
+		Me.useTextDetails.Text = "Display own text in Details during play"
 		Me.useTextDetails.UseVisualStyleBackColor = True
 		'
 		'frmMain
@@ -242,7 +243,6 @@ Partial Class frmMain
 		Me.BackColor = System.Drawing.SystemColors.Control
 		Me.ClientSize = New System.Drawing.Size(290, 451)
 		Me.Controls.Add(Me.useTextDetails)
-		Me.Controls.Add(Me.useTrackState)
 		Me.Controls.Add(Me.useCustomImages)
 		Me.Controls.Add(Me.useOwnApp)
 		Me.Controls.Add(Me.chkShare)
@@ -259,6 +259,7 @@ Partial Class frmMain
 		Me.Controls.Add(Me.txtAddText)
 		Me.Controls.Add(Me.lblAddText)
 		Me.Controls.Add(Me.webView)
+		Me.Controls.Add(Me.useTrackState)
 		Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
 		Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)

@@ -81,24 +81,24 @@ Public Class frmMain
 
             track = track.Split("(").First
             If useCustomImages.Checked Or Not large_image = "custom" Then
-                large_image = track.Replace(" ", "").Replace("'", "").ToLower().Replace(".", "_")
+                large_image = track.Replace(" ", "").Replace("'", "").ToLower().Replace(".", "_").Replace(",", "_")
             End If
 
 
             If details = "Not in a room" Then
-                    large_image = "placeholder"
-                    state = My.Settings.addText
-                End If
+                large_image = "placeholder"
+                state = My.Settings.addText
+            End If
 
-                If large_image.Length > 32 Then
-                    'large_image = large_image.Substring(0, 32).Split("(").First
-                    large_image = "custom"
-                End If
-                If track.Length > 128 Then
-                    track = track.Substring(0, 128)
-                End If
+            If large_image.Length > 32 Then
+                'large_image = large_image.Substring(0, 32).Split("(").First
+                large_image = "custom"
+            End If
+            If track.Length > 128 Then
+                track = track.Substring(0, 128)
+            End If
 
-                lvInfos.Items.Clear()
+            lvInfos.Items.Clear()
                 Dim d As New ListViewItem
                 d.Text = "Details"
                 d.SubItems.Add(details)
@@ -120,17 +120,20 @@ Public Class frmMain
                 si.SubItems.Add(small_image)
                 lvInfos.Items.Add(si)
 
-            If useTrackState.Checked Then
+            If useTrackState.Checked And Not details = "Not in a room" Then
                 Dim actualstate = state
                 state = track
                 track = actualstate
                 ' hover large image to get state (VS Race or Battle) and state field has track name
             End If
             Dim smallimagetext = txtAddText.Text
-            If useTextDetails.Checked Then
+            If useTextDetails.Checked And Not details = "Not in a room" Then
                 smallimagetext = details
                 details = txtAddText.Text
                 ' hover small image to get details (Friends, Worldwide, Regional) and details field has own text
+            End If
+            If details = "Not in a room" Then
+                smallimagetext = "MKWii-RPRedux"
             End If
 
             Dim pres As New RichPresence() With {
@@ -167,7 +170,8 @@ Public Class frmMain
         txtAddText.Text = My.Settings.addText
 
         useOwnApp.Checked = My.Settings.useOwnApp
-
+        useTrackState.Checked = My.Settings.useTrackState
+        useTextDetails.Checked = My.Settings.useTextDetails
         init_client()
     End Sub
     Private Sub init_client()
@@ -192,7 +196,7 @@ Public Class frmMain
         End If
         client.SetPresence(New RichPresence() With {
             .Details = "MKW-RPRedux active",
-            .State = "Starting up (or configuring)",
+            .State = "Starting up",
             .Assets = New Assets() With {
                 .LargeImageKey = "placeholder",
                 .LargeImageText = "MKWii-RPRedux",
@@ -212,14 +216,15 @@ Public Class frmMain
 
     Private Sub btnOpenClose_Click(sender As Object, e As EventArgs) Handles btnOpenClose.Click
         If Me.Tag = "expanded" Then
+            Me.WindowState = FormWindowState.Normal
             Me.Tag = ""
-            Me.Size = New Size(306, 440)
+            Me.Size = New Size(306, 490)
             Me.MaximizeBox = False
             Me.FormBorderStyle = FormBorderStyle.FixedSingle
             btnOpenClose.Text = "Expand >>"
         Else
             Me.Tag = "expanded"
-            Me.Size = New Size(784, 440)
+            Me.Size = New Size(784, 490)
             Me.MaximizeBox = True
             Me.FormBorderStyle = FormBorderStyle.Sizable
             btnOpenClose.Text = "<< Retract"
@@ -251,5 +256,13 @@ Public Class frmMain
         client.ClearPresence()
         client.Dispose()
         init_client()
+    End Sub
+
+    Private Sub useTrackState_CheckedChanged(sender As Object, e As EventArgs) Handles useTrackState.CheckedChanged
+        My.Settings.useTrackState = useTrackState.Checked
+    End Sub
+
+    Private Sub useTextDetails_CheckedChanged(sender As Object, e As EventArgs) Handles useTextDetails.CheckedChanged
+        My.Settings.useTextDetails = useTextDetails.Checked
     End Sub
 End Class
