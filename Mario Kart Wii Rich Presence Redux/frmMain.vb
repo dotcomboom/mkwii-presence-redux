@@ -58,7 +58,7 @@ Public Class frmMain
             End If
 
 
-            Dim trackrgx As Regex = New Regex("Last track: .*>(.*) \(Nintendo\)</a>")
+            Dim trackrgx As Regex = New Regex("Last track: .*>(.*)</a>")
             Dim tmatches = trackrgx.Matches(html)
             If tmatches.Count > 0 Then
                 track = tmatches(0).Groups(1).Value.Replace("Wii ", "")
@@ -74,55 +74,85 @@ Public Class frmMain
             End If
 
             small_image = "mario"
-            large_image = track.Replace(" ", "").Replace("'", "").ToLower()
+
+            If Not track.EndsWith("(Nintendo)") Then
+                large_image = "custom"
+            End If
+
+            track = track.Split("(").First
+            If useCustomImages.Checked Or Not large_image = "custom" Then
+                large_image = track.Replace(" ", "").Replace("'", "").ToLower().Replace(".", "_")
+            End If
+
 
             If details = "Not in a room" Then
-                large_image = "placeholder"
-                state = My.Settings.addText
+                    large_image = "placeholder"
+                    state = My.Settings.addText
+                End If
+
+                If large_image.Length > 32 Then
+                    'large_image = large_image.Substring(0, 32).Split("(").First
+                    large_image = "custom"
+                End If
+                If track.Length > 128 Then
+                    track = track.Substring(0, 128)
+                End If
+
+                lvInfos.Items.Clear()
+                Dim d As New ListViewItem
+                d.Text = "Details"
+                d.SubItems.Add(details)
+                lvInfos.Items.Add(d)
+                Dim s As New ListViewItem
+                s.Text = "State"
+                s.SubItems.Add(state)
+                lvInfos.Items.Add(s)
+                Dim t As New ListViewItem
+                t.Text = "Track"
+                t.SubItems.Add(track)
+                lvInfos.Items.Add(t)
+                Dim li As New ListViewItem
+                li.Text = "Large image"
+                li.SubItems.Add(large_image)
+                lvInfos.Items.Add(li)
+                Dim si As New ListViewItem
+                si.Text = "Small image"
+                si.SubItems.Add(small_image)
+                lvInfos.Items.Add(si)
+
+            If useTrackState.Checked Then
+                Dim actualstate = state
+                state = track
+                track = actualstate
+                ' hover large image to get state (VS Race or Battle) and state field has track name
             End If
-
-            lvInfos.Items.Clear()
-            Dim d As New ListViewItem
-            d.Text = "Details"
-            d.SubItems.Add(details)
-            lvInfos.Items.Add(d)
-            Dim s As New ListViewItem
-            s.Text = "State"
-            s.SubItems.Add(state)
-            lvInfos.Items.Add(s)
-            Dim t As New ListViewItem
-            t.Text = "Track"
-            t.SubItems.Add(track)
-            lvInfos.Items.Add(t)
-            Dim li As New ListViewItem
-            li.Text = "Large image"
-            li.SubItems.Add(large_image)
-            lvInfos.Items.Add(li)
-            Dim si As New ListViewItem
-            si.Text = "Small image"
-            si.SubItems.Add(small_image)
-            lvInfos.Items.Add(si)
-
+            Dim smallimagetext = txtAddText.Text
+            If useTextDetails.Checked Then
+                smallimagetext = details
+                details = txtAddText.Text
+                ' hover small image to get details (Friends, Worldwide, Regional) and details field has own text
+            End If
 
             Dim pres As New RichPresence() With {
-                               .Details = details,
-                               .State = state,
-                               .Assets = New Assets() With {
-                               .LargeImageKey = large_image,
-                               .SmallImageKey = small_image,
-                               .LargeImageText = track,
-                               .SmallImageText = txtAddText.Text}}
+                                   .Details = details,
+                                   .State = state,
+                                   .Assets = New Assets() With {
+                                   .LargeImageKey = large_image,
+                                   .SmallImageKey = small_image,
+                                   .LargeImageText = track,
+                                   .SmallImageText = smallimagetext}}
 
             If My.Settings.shareBtn Then
-                Dim btn As New DiscordRPC.Button
-                btn.Url = txtUserURL.Text
-                btn.Label = "View details"
-                pres.Buttons = {btn}
+                    Dim btn As New DiscordRPC.Button
+                    btn.Url = txtUserURL.Text
+                    btn.Label = "View details"
+                    pres.Buttons = {btn}
+                End If
+
+                client.SetPresence(pres)
+
             End If
 
-            client.SetPresence(pres)
-
-        End If
 
 
     End Sub
