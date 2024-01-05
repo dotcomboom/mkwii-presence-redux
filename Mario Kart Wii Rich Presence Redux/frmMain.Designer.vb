@@ -41,7 +41,6 @@ Partial Class frmMain
 		Me.TextBox2 = New System.Windows.Forms.TextBox()
 		Me.TextBox3 = New System.Windows.Forms.TextBox()
 		Me.useOwnApp = New System.Windows.Forms.CheckBox()
-		Me.useCustomImages = New System.Windows.Forms.CheckBox()
 		Me.useTrackState = New System.Windows.Forms.CheckBox()
 		Me.useTextDetails = New System.Windows.Forms.CheckBox()
 		Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
@@ -56,9 +55,9 @@ Partial Class frmMain
 			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.webView.CreationProperties = Nothing
 		Me.webView.DefaultBackgroundColor = System.Drawing.Color.White
-		Me.webView.Location = New System.Drawing.Point(296, 9)
+		Me.webView.Location = New System.Drawing.Point(280, 7)
 		Me.webView.Name = "webView"
-		Me.webView.Size = New System.Drawing.Size(0, 430)
+		Me.webView.Size = New System.Drawing.Size(284, 423)
 		Me.webView.Source = New System.Uri("https://wiimmfi.de/stats/mkw", System.UriKind.Absolute)
 		Me.webView.TabIndex = 13
 		Me.webView.Visible = False
@@ -67,7 +66,7 @@ Partial Class frmMain
 		'lblAddText
 		'
 		Me.lblAddText.AutoSize = True
-		Me.lblAddText.Location = New System.Drawing.Point(12, 9)
+		Me.lblAddText.Location = New System.Drawing.Point(9, 9)
 		Me.lblAddText.Name = "lblAddText"
 		Me.lblAddText.Size = New System.Drawing.Size(85, 15)
 		Me.lblAddText.TabIndex = 1
@@ -75,7 +74,7 @@ Partial Class frmMain
 		'
 		'txtAddText
 		'
-		Me.txtAddText.Location = New System.Drawing.Point(14, 27)
+		Me.txtAddText.Location = New System.Drawing.Point(12, 27)
 		Me.txtAddText.Name = "txtAddText"
 		Me.txtAddText.Size = New System.Drawing.Size(260, 23)
 		Me.txtAddText.TabIndex = 2
@@ -84,9 +83,9 @@ Partial Class frmMain
 		'
 		Me.lvInfos.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
 		Me.lvInfos.HideSelection = False
-		Me.lvInfos.Location = New System.Drawing.Point(14, 266)
+		Me.lvInfos.Location = New System.Drawing.Point(12, 191)
 		Me.lvInfos.Name = "lvInfos"
-		Me.lvInfos.Size = New System.Drawing.Size(260, 144)
+		Me.lvInfos.Size = New System.Drawing.Size(260, 135)
 		Me.lvInfos.TabIndex = 10
 		Me.lvInfos.UseCompatibleStateImageBehavior = False
 		Me.lvInfos.View = System.Windows.Forms.View.Details
@@ -99,11 +98,11 @@ Partial Class frmMain
 		'ColumnHeader2
 		'
 		Me.ColumnHeader2.Text = "Value"
-		Me.ColumnHeader2.Width = 110
+		Me.ColumnHeader2.Width = 162
 		'
 		'txtUserURL
 		'
-		Me.txtUserURL.Location = New System.Drawing.Point(14, 81)
+		Me.txtUserURL.Location = New System.Drawing.Point(12, 80)
 		Me.txtUserURL.Name = "txtUserURL"
 		Me.txtUserURL.Size = New System.Drawing.Size(260, 23)
 		Me.txtUserURL.TabIndex = 4
@@ -111,17 +110,19 @@ Partial Class frmMain
 		'lnkList
 		'
 		Me.lnkList.AutoSize = True
-		Me.lnkList.Location = New System.Drawing.Point(11, 63)
+		Me.lnkList.Location = New System.Drawing.Point(10, 62)
 		Me.lnkList.Name = "lnkList"
 		Me.lnkList.Size = New System.Drawing.Size(114, 15)
 		Me.lnkList.TabIndex = 3
 		Me.lnkList.TabStop = True
 		Me.lnkList.Tag = ""
 		Me.lnkList.Text = "Wiimmfi Profile URL"
+		Me.ToolTip1.SetToolTip(Me.lnkList, "To get the profile URL, find your friend code on the linked Wiimmfi page during a" &
+		" match, right click the 👁 icon and copy the link.")
 		'
 		'btnSaveUpdate
 		'
-		Me.btnSaveUpdate.Location = New System.Drawing.Point(198, 110)
+		Me.btnSaveUpdate.Location = New System.Drawing.Point(197, 109)
 		Me.btnSaveUpdate.Name = "btnSaveUpdate"
 		Me.btnSaveUpdate.Size = New System.Drawing.Size(75, 23)
 		Me.btnSaveUpdate.TabIndex = 6
@@ -130,7 +131,7 @@ Partial Class frmMain
 		'
 		'lblTutorial
 		'
-		Me.lblTutorial.Location = New System.Drawing.Point(13, 136)
+		Me.lblTutorial.Location = New System.Drawing.Point(9, 138)
 		Me.lblTutorial.Name = "lblTutorial"
 		Me.lblTutorial.Size = New System.Drawing.Size(263, 52)
 		Me.lblTutorial.TabIndex = 7
@@ -139,7 +140,8 @@ Partial Class frmMain
 		'
 		'btnOpenClose
 		'
-		Me.btnOpenClose.Location = New System.Drawing.Point(197, 416)
+		Me.btnOpenClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+		Me.btnOpenClose.Location = New System.Drawing.Point(196, 407)
 		Me.btnOpenClose.Name = "btnOpenClose"
 		Me.btnOpenClose.Size = New System.Drawing.Size(76, 23)
 		Me.btnOpenClose.TabIndex = 12
@@ -150,7 +152,7 @@ Partial Class frmMain
 		'
 		Me.lnkGithub.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
 		Me.lnkGithub.AutoSize = True
-		Me.lnkGithub.Location = New System.Drawing.Point(13, 427)
+		Me.lnkGithub.Location = New System.Drawing.Point(9, 411)
 		Me.lnkGithub.Name = "lnkGithub"
 		Me.lnkGithub.Size = New System.Drawing.Size(43, 15)
 		Me.lnkGithub.TabIndex = 11
@@ -160,7 +162,7 @@ Partial Class frmMain
 		'chkShare
 		'
 		Me.chkShare.AutoSize = True
-		Me.chkShare.Location = New System.Drawing.Point(14, 110)
+		Me.chkShare.Location = New System.Drawing.Point(12, 109)
 		Me.chkShare.Name = "chkShare"
 		Me.chkShare.Size = New System.Drawing.Size(128, 19)
 		Me.chkShare.TabIndex = 5
@@ -198,42 +200,31 @@ Partial Class frmMain
 		'useOwnApp
 		'
 		Me.useOwnApp.AutoSize = True
-		Me.useOwnApp.Location = New System.Drawing.Point(14, 191)
+		Me.useOwnApp.Location = New System.Drawing.Point(12, 384)
 		Me.useOwnApp.Name = "useOwnApp"
 		Me.useOwnApp.Size = New System.Drawing.Size(193, 19)
 		Me.useOwnApp.TabIndex = 9
 		Me.useOwnApp.Text = "Use custom Discord application"
 		Me.useOwnApp.UseVisualStyleBackColor = True
 		'
-		'useCustomImages
-		'
-		Me.useCustomImages.AutoSize = True
-		Me.useCustomImages.Location = New System.Drawing.Point(16, 166)
-		Me.useCustomImages.Name = "useCustomImages"
-		Me.useCustomImages.Size = New System.Drawing.Size(191, 19)
-		Me.useCustomImages.TabIndex = 100000
-		Me.useCustomImages.Text = "Use art assets for custom tracks"
-		Me.useCustomImages.UseVisualStyleBackColor = True
-		Me.useCustomImages.Visible = False
-		'
 		'useTrackState
 		'
 		Me.useTrackState.AutoSize = True
-		Me.useTrackState.Location = New System.Drawing.Point(14, 216)
+		Me.useTrackState.Location = New System.Drawing.Point(12, 334)
 		Me.useTrackState.Name = "useTrackState"
-		Me.useTrackState.Size = New System.Drawing.Size(239, 19)
-		Me.useTrackState.TabIndex = 100001
-		Me.useTrackState.Text = "Display current track in State during play"
+		Me.useTrackState.Size = New System.Drawing.Size(251, 19)
+		Me.useTrackState.TabIndex = 7
+		Me.useTrackState.Text = "Display current track in State during match"
 		Me.useTrackState.UseVisualStyleBackColor = True
 		'
 		'useTextDetails
 		'
 		Me.useTextDetails.AutoSize = True
-		Me.useTextDetails.Location = New System.Drawing.Point(14, 241)
+		Me.useTextDetails.Location = New System.Drawing.Point(12, 359)
 		Me.useTextDetails.Name = "useTextDetails"
-		Me.useTextDetails.Size = New System.Drawing.Size(227, 19)
-		Me.useTextDetails.TabIndex = 100002
-		Me.useTextDetails.Text = "Display own text in Details during play"
+		Me.useTextDetails.Size = New System.Drawing.Size(239, 19)
+		Me.useTextDetails.TabIndex = 8
+		Me.useTextDetails.Text = "Display own text in Details during match"
 		Me.useTextDetails.UseVisualStyleBackColor = True
 		'
 		'frmMain
@@ -241,14 +232,16 @@ Partial Class frmMain
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.BackColor = System.Drawing.SystemColors.Control
-		Me.ClientSize = New System.Drawing.Size(290, 451)
+		Me.ClientSize = New System.Drawing.Size(574, 436)
 		Me.Controls.Add(Me.useTextDetails)
-		Me.Controls.Add(Me.useCustomImages)
+		Me.Controls.Add(Me.lblTutorial)
+		Me.Controls.Add(Me.txtAddText)
+		Me.Controls.Add(Me.lblAddText)
+		Me.Controls.Add(Me.useTrackState)
 		Me.Controls.Add(Me.useOwnApp)
 		Me.Controls.Add(Me.chkShare)
 		Me.Controls.Add(Me.lnkGithub)
 		Me.Controls.Add(Me.btnOpenClose)
-		Me.Controls.Add(Me.lblTutorial)
 		Me.Controls.Add(Me.btnSaveUpdate)
 		Me.Controls.Add(Me.lnkList)
 		Me.Controls.Add(Me.txtUserURL)
@@ -256,14 +249,12 @@ Partial Class frmMain
 		Me.Controls.Add(Me.lvInfos)
 		Me.Controls.Add(Me.TextBox2)
 		Me.Controls.Add(Me.Label2)
-		Me.Controls.Add(Me.txtAddText)
-		Me.Controls.Add(Me.lblAddText)
 		Me.Controls.Add(Me.webView)
-		Me.Controls.Add(Me.useTrackState)
 		Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
 		Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
 		Me.MaximizeBox = False
+		Me.MinimumSize = New System.Drawing.Size(300, 475)
 		Me.Name = "frmMain"
 		Me.Text = "MKWii-RPRedux"
 		CType(Me.webView, System.ComponentModel.ISupportInitialize).EndInit()
@@ -288,7 +279,6 @@ Partial Class frmMain
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents TextBox3 As TextBox
     Friend WithEvents useOwnApp As CheckBox
-	Friend WithEvents useCustomImages As CheckBox
 	Friend WithEvents useTrackState As CheckBox
 	Friend WithEvents useTextDetails As CheckBox
 	Friend WithEvents ToolTip1 As ToolTip

@@ -29,7 +29,13 @@ Public Class frmMain
             'scraping :)
             ' <a href="https://ct.wiimm.de/i/3459">N64 Sherbet Land (Nintendo)</a>
             Dim html As String
-            html = Await webView.ExecuteScriptAsync("document.documentElement.outerHTML;")
+            Try
+                html = Await webView.ExecuteScriptAsync("document.documentElement.outerHTML;")
+            Catch ex As System.InvalidOperationException
+                ' browser not yet loaded
+                Exit Sub
+            End Try
+
 
             ' "The Html comes back with unicode character codes, other escaped characters, and
             ' wrapped in double quotes, so I'm using this code to clean it up for what I'm doing."
@@ -80,7 +86,7 @@ Public Class frmMain
             End If
 
             track = track.Split("(").First
-            If useCustomImages.Checked Or Not large_image = "custom" Then
+            If My.Settings.useCustomCourseImages Or Not large_image = "custom" Then
                 large_image = track.Replace(" ", "").Replace("'", "").ToLower().Replace(".", "_").Replace(",", "_")
             End If
 
@@ -99,26 +105,26 @@ Public Class frmMain
             End If
 
             lvInfos.Items.Clear()
-                Dim d As New ListViewItem
-                d.Text = "Details"
-                d.SubItems.Add(details)
-                lvInfos.Items.Add(d)
-                Dim s As New ListViewItem
-                s.Text = "State"
-                s.SubItems.Add(state)
-                lvInfos.Items.Add(s)
-                Dim t As New ListViewItem
-                t.Text = "Track"
-                t.SubItems.Add(track)
-                lvInfos.Items.Add(t)
-                Dim li As New ListViewItem
-                li.Text = "Large image"
-                li.SubItems.Add(large_image)
-                lvInfos.Items.Add(li)
-                Dim si As New ListViewItem
-                si.Text = "Small image"
-                si.SubItems.Add(small_image)
-                lvInfos.Items.Add(si)
+            Dim d As New ListViewItem
+            d.Text = "Details"
+            d.SubItems.Add(details)
+            lvInfos.Items.Add(d)
+            Dim s As New ListViewItem
+            s.Text = "State"
+            s.SubItems.Add(state)
+            lvInfos.Items.Add(s)
+            Dim t As New ListViewItem
+            t.Text = "Track"
+            t.SubItems.Add(track)
+            lvInfos.Items.Add(t)
+            Dim li As New ListViewItem
+            li.Text = "Large image"
+            li.SubItems.Add(large_image)
+            lvInfos.Items.Add(li)
+            Dim si As New ListViewItem
+            si.Text = "Small image"
+            si.SubItems.Add(small_image)
+            lvInfos.Items.Add(si)
 
             If useTrackState.Checked And Not details = "Not in a room" Then
                 Dim actualstate = state
@@ -146,21 +152,21 @@ Public Class frmMain
                                    .SmallImageText = smallimagetext}}
 
             If My.Settings.shareBtn Then
-                    Dim btn As New DiscordRPC.Button
-                    btn.Url = txtUserURL.Text
-                    btn.Label = "View details"
-                    pres.Buttons = {btn}
-                End If
-
-                client.SetPresence(pres)
-
+                Dim btn As New DiscordRPC.Button
+                btn.Url = txtUserURL.Text
+                btn.Label = "View details"
+                pres.Buttons = {btn}
             End If
 
+            client.SetPresence(pres)
 
-
+        End If
     End Sub
 
     Private Sub Form1_Load() Handles MyBase.Load
+        My.Settings.Upgrade()
+        Me.Size = New Size(Me.MinimumSize.Width, Me.MinimumSize.Height)
+
         If My.Settings.startUrl.AbsolutePath = "about:blank" Then
             My.Settings.startUrl = New Uri("https://wiimmfi.de/stats/mkw/room/p")
         End If
@@ -218,13 +224,13 @@ Public Class frmMain
         If Me.Tag = "expanded" Then
             Me.WindowState = FormWindowState.Normal
             Me.Tag = ""
-            Me.Size = New Size(306, 490)
+            Me.Size = New Size(Me.MinimumSize.Width, Me.MinimumSize.Height)
             Me.MaximizeBox = False
             Me.FormBorderStyle = FormBorderStyle.FixedSingle
             btnOpenClose.Text = "Expand >>"
         Else
             Me.Tag = "expanded"
-            Me.Size = New Size(784, 490)
+            Me.Size = New Size(1000, Me.Height)
             Me.MaximizeBox = True
             Me.FormBorderStyle = FormBorderStyle.Sizable
             btnOpenClose.Text = "<< Retract"
@@ -236,15 +242,13 @@ Public Class frmMain
         Process.Start("https://github.com/dotcomboom/mkwii-rpredux")
     End Sub
 
-    Private Sub chkShare_CheckedChanged(sender As Object, e As EventArgs) Handles chkShare.CheckedChanged
-        My.Settings.shareBtn = chkShare.Checked
-    End Sub
-
     Private Sub useOwnApp_CheckedChanged(sender As Object, e As EventArgs) Handles useOwnApp.Click
         If useOwnApp.Checked Then
             frmOwnRPC.ClientId.Text = My.Settings.userAppId
+            frmOwnRPC.useCustomImages.Checked = My.Settings.useCustomCourseImages
             If frmOwnRPC.ShowDialog = DialogResult.OK Then
                 My.Settings.userAppId = frmOwnRPC.ClientId.Text
+                My.Settings.useCustomCourseImages = frmOwnRPC.useCustomImages.Checked
             Else
                 useOwnApp.Checked = False
             End If
@@ -256,13 +260,21 @@ Public Class frmMain
         client.ClearPresence()
         client.Dispose()
         init_client()
+        UpdateRPC()
+    End Sub
+
+    Private Sub chkShare_CheckedChanged(sender As Object, e As EventArgs) Handles chkShare.CheckedChanged
+        My.Settings.shareBtn = chkShare.Checked
+        UpdateRPC()
     End Sub
 
     Private Sub useTrackState_CheckedChanged(sender As Object, e As EventArgs) Handles useTrackState.CheckedChanged
         My.Settings.useTrackState = useTrackState.Checked
+        UpdateRPC()
     End Sub
 
     Private Sub useTextDetails_CheckedChanged(sender As Object, e As EventArgs) Handles useTextDetails.CheckedChanged
         My.Settings.useTextDetails = useTextDetails.Checked
+        UpdateRPC()
     End Sub
 End Class
