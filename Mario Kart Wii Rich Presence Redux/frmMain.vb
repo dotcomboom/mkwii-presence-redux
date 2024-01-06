@@ -87,7 +87,8 @@ Public Class frmMain
 
             track = track.Split("(").First
             If My.Settings.useCustomCourseImages Or Not large_image = "custom" Then
-                large_image = track.Replace(" ", "").Replace("'", "").ToLower().Replace(".", "_").Replace(",", "_")
+                large_image = Regex.Replace(track.Replace(" ", "").Replace(",", ""), "[^A-Za-z0-9\-/]", "_").ToLower()
+                'large_image = track.Replace(" ", "").Replace("'", "").ToLower().Replace(".", "_").Replace(",", "_")
             End If
 
 
