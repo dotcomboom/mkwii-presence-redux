@@ -17,11 +17,11 @@
     <Setting Name="userAppId" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="useTrackState" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="useTrackState" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="useTextDetails" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="useTextDetails" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="useCustomCourseImages" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

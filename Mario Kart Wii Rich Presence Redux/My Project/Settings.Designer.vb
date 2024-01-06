@@ -116,10 +116,10 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property useTrackState() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property useTrackState() As Boolean
             Get
-                Return CType(Me("useTrackState"),String)
+                Return CType(Me("useTrackState"),Boolean)
             End Get
             Set
                 Me("useTrackState") = value
@@ -128,10 +128,10 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property useTextDetails() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property useTextDetails() As Boolean
             Get
-                Return CType(Me("useTextDetails"),String)
+                Return CType(Me("useTextDetails"),Boolean)
             End Get
             Set
                 Me("useTextDetails") = value
