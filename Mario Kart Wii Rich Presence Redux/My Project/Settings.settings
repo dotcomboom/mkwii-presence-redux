@@ -1,30 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" UseMySettingsClassName="true">
   <Profiles />
-  <Settings>
-    <Setting Name="startUrl" Type="System.Uri" Scope="User">
-      <Value Profile="(Default)">https://wiimmfi.de/stats/mkw/room/p1</Value>
-    </Setting>
-    <Setting Name="shareBtn" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="addText" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0000-0000-0000</Value>
-    </Setting>
-    <Setting Name="useOwnApp" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="userAppId" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="useTrackState" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="useTextDetails" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="useCustomCourseImages" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-  </Settings>
+  <Settings />
 </SettingsFile>
