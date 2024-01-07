@@ -166,7 +166,6 @@ Public Class frmMain
     End Sub
 
     Private Sub Form1_Load() Handles MyBase.Load
-        My.Settings.Upgrade()
         Me.Size = New Size(Me.MinimumSize.Width, Me.MinimumSize.Height)
 
         If My.Settings.startUrl.AbsolutePath = "about:blank" Then
